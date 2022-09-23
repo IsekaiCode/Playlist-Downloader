@@ -1,6 +1,9 @@
 import tkinter as tk
 from threading import Thread
 
+import spotifydownloader as sd
+import ytdownloader as yd
+
 window = tk.Tk()
 window.title("Playlist Downloader")
 
@@ -19,7 +22,7 @@ text1 = tk.Label(window, bg='#856ff8',
 text1.place(x=20, y=200)
 
 text3 = tk.Label(window, bg='#856ff8',
-                 text="url of the playlist :",
+                 text="playlist_url of the playlist :",
                  font=("Helvetica", 14))
 text3.place(x=20, y=340)
 
@@ -35,25 +38,26 @@ platform.set("youtube")
 options = tk.OptionMenu(window, platform, "youtube", "spotify")
 options.place(x=240, y=202)
 
-url = tk.Text(window, height=1.2, width=50)
-url.place(x=240, y=345)
+playlist_url = tk.Text(window, height=1.2, width=50)
+playlist_url.place(x=240, y=345)
 
 
 def on_closing():
     window.destroy()
 
+
 def threading():
-    # Call work function
-    t1=Thread(target=clicked)
-    t1.start()
+        # Call work function
+        t1 = Thread(target=clicked)
+        t1.start()
 
 def clicked():
     if platform.get() == 'youtube':
-        from ytdownloader import main
-        main(url.get("1.0", 'end-1c'))
+        yt_url = playlist_url.get("1.0", 'end-1c')
+        yd.main(yt_url)
     elif platform.get() == 'spotify':
-        from spotifydownloader import main
-        main(url.get("1.0", 'end-1c'))
+        sp_url = playlist_url.get("1.0", 'end-1c')
+        sd.main(sp_url)
 
 
 button = tk.Button(window, text="submit", width=10, command=threading)
