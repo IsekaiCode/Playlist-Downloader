@@ -73,6 +73,7 @@ def main(url: str, wd_path='./chromedriver.exe'):
 
     if url.find('https://open.spotify.com') != 1:
 
+        try:
             # Web driver
             s = Service(wd_path)
             options = webdriver.ChromeOptions()
@@ -102,4 +103,6 @@ def main(url: str, wd_path='./chromedriver.exe'):
                     with open('failed_downloads.txt', 'w') as f:
                         f.write(f'failed... {song_name}\n')
                     continue
-
+                
+        except:
+            print("invalid url")
