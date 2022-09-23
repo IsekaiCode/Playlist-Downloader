@@ -1,6 +1,9 @@
 import tkinter as tk
+from threading import Thread
 
 window = tk.Tk()
+window.title("Playlist Downloader")
+
 window.geometry(
     f"800x500+{(window.winfo_screenwidth()//2)-400}+{(window.winfo_screenheight()//2)-300}")
 window.configure(bg='#856ff8')
@@ -39,6 +42,10 @@ url.place(x=240, y=345)
 def on_closing():
     window.destroy()
 
+def threading():
+    # Call work function
+    t1=Thread(target=clicked)
+    t1.start()
 
 def clicked():
     if platform.get() == 'youtube':
@@ -49,8 +56,8 @@ def clicked():
         main(url.get("1.0", 'end-1c'))
 
 
-youtube_button = tk.Button(window, text="submit", width=10, command=clicked)
-youtube_button.place(x=345, y=420)
+button = tk.Button(window, text="submit", width=10, command=threading)
+button.place(x=345, y=420)
 
 window.protocol("WM_DELETE_WINDOW", on_closing)
 window.mainloop()
