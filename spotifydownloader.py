@@ -102,3 +102,4 @@ def main(url: str, wd_path='./chromedriver.exe'):
                     with open('failed_downloads.txt', 'w') as f:
                         f.write(f'failed... {song_name}\n')
                     continue
+
