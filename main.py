@@ -15,16 +15,6 @@ text1 = tk.Label(window, bg='#856ff8',
                  font=("Helvetica", 15))
 text1.place(x=20, y=200)
 
-text2 = tk.Label(window, bg='#856ff8',
-                 text="maximum songs :",
-                 font=("Helvetica", 14))
-text2.place(x=20, y=270)
-
-text2 = tk.Label(window, bg='#856ff8',
-                 text="maximum songs :",
-                 font=("Helvetica", 14))
-text2.place(x=20, y=270)
-
 text3 = tk.Label(window, bg='#856ff8',
                  text="url of the playlist :",
                  font=("Helvetica", 14))
@@ -42,9 +32,6 @@ platform.set("youtube")
 options = tk.OptionMenu(window, platform, "youtube", "spotify")
 options.place(x=240, y=202)
 
-max_songs = tk.Text(window, height=1.2, width=10)
-max_songs.place(x=240, y=275)
-
 url = tk.Text(window, height=1.2, width=50)
 url.place(x=240, y=345)
 
@@ -55,11 +42,11 @@ def on_closing():
 
 def clicked():
     if platform.get() == 'youtube':
-        from YoutubeDownloader import main
-        main(url.get("1.0", 'end-1c'), int(max_songs.get("1.0", 'end-1c')))
+        from ytdownloader import main
+        main(url.get("1.0", 'end-1c'))
     elif platform.get() == 'spotify':
-        from SpootifyDownloader import main
-        main(url.get("1.0", 'end-1c'), int(max_songs.get("1.0", 'end-1c')))
+        from spotifydownloader import main
+        main(url.get("1.0", 'end-1c'))
 
 
 youtube_button = tk.Button(window, text="submit", width=10, command=clicked)
